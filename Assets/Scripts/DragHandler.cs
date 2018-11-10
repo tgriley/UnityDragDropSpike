@@ -12,7 +12,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         TargetSlot = transform.parent.gameObject;
-        transform.SetParent(transform.parent.parent.parent);
+        transform.SetParent(transform.parent.parent.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
