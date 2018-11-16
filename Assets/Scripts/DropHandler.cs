@@ -5,6 +5,10 @@ public class DropHandler : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        eventData.pointerDrag.GetComponent<DragHandler>().TargetSlot = gameObject;
+        var droppedItemType = eventData.pointerDrag.GetComponent<ItemController>().ItemModel.ItemType;
+        if (gameObject.GetComponent<SlotController>().AllowedItemsTypes.Contains(droppedItemType))
+        {
+            eventData.pointerDrag.GetComponent<DragHandler>().TargetSlot = gameObject;
+        }
     }
 }

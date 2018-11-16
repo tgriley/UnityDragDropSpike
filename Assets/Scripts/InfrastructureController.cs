@@ -12,6 +12,7 @@ public class InfrastructureController : MonoBehaviour {
 		{
 			var slot = (GameObject)Instantiate(Resources.Load("Prefabs/Slot"));
 			slot.transform.parent = transform.parent.Find("Slots").transform;
+			slot.GetComponent<SlotController>().AllowedItemsTypes.Add(ItemTypes.Type1);
 		}
 	}
 }
