@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Enums;
+using Models;
+using UnityEngine;
 
 public class Item2 : IItem
 {
