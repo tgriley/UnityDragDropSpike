@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Generic;
+using Persistence;
 
 namespace Models
 {
     public class Inventory
     {
-        [NonSerialized] 
+        private SaveStateRepository _saveStateRepository;
         public IList<IItem> Items;
 
         public Inventory()
         {
-            Items = new List<IItem>();
-            
-            Items.Add(new Item1());
-            Items.Add(new Item1());
-            Items.Add(new Item2());
-            Items.Add(new Item2());
+            _saveStateRepository = new SaveStateRepository();
+
+            var saveState = _saveStateRepository.Read();
+            Items = saveState.Inventory;
         }
     }
 }
