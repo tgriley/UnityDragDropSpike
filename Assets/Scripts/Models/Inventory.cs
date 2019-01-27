@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Persistence;
 
@@ -14,7 +13,8 @@ namespace Models
             _saveStateRepository = new SaveStateRepository();
 
             var saveState = _saveStateRepository.Read();
-            Items = saveState.Inventory;
+            
+            Items = new List<IItem>();
         }
     }
 }

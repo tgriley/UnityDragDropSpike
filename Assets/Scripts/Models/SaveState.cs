@@ -6,7 +6,13 @@ namespace Models
     [Serializable]
     public class SaveState
     {
-        public List<IItem> Inventory { get; set; }
-        public List<IItem> Infrastructure { get; set; }
+        public List<SaveStateItem> Inventory;
+        public int Id;
+    }
+
+    [Serializable]
+    public class SaveStateItem
+    {
+        public int Id;
     }
 }
