@@ -3,9 +3,9 @@ using Models;
 
 namespace Factories
 {
-    public class ItemFactory
+    public static class ItemFactory
     {
-        public IItem GetItem(int id)
+        public static IItem GetItem(int id)
         {
             switch (id)
             {

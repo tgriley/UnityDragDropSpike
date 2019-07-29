@@ -9,6 +9,21 @@ namespace Persistence
         private readonly string SaveStateKey = "save-state";
         public SaveState Read()
         {
+//            Save(new SaveState()
+//            {
+//                Inventory = new List<SaveStateItem>()
+//                {
+//                    new SaveStateItem(){Id = 1},
+//                    new SaveStateItem(){Id = 1},
+//                    new SaveStateItem(){Id = 2},
+//                },
+//                Infrastructure = new List<SaveStateItem>()
+//                {
+//                    new SaveStateItem(){Id = 1},
+//                    new SaveStateItem(){Id = 1}
+//                }
+//            });
+            
             if (!PlayerPrefs.HasKey(SaveStateKey))
             {
                 return new SaveState();

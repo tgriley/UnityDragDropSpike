@@ -7,6 +7,7 @@ namespace Models
     public class SaveState
     {
         public List<SaveStateItem> Inventory;
+        public List<SaveStateItem> Infrastructure;
         public int Id;
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Factories;
 using Persistence;
 
 namespace Models
@@ -10,15 +11,16 @@ namespace Models
 
         public Inventory()
         {
+            Items = new List<IItem>();
+            
             _saveStateRepository = new SaveStateRepository();
 
             var saveState = _saveStateRepository.Read();
-            
-            Items = new List<IItem>
+
+            foreach (var saveStateItem in saveState.Inventory)
             {
-                new Item1(),
-                new Item2()
-            };
+                Items.Add(ItemFactory.GetItem(saveStateItem.Id));
+            }
         }
     }
 }
