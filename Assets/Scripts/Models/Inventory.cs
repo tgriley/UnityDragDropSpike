@@ -14,7 +14,11 @@ namespace Models
 
             var saveState = _saveStateRepository.Read();
             
-            Items = new List<IItem>();
+            Items = new List<IItem>
+            {
+                new Item1(),
+                new Item2()
+            };
         }
     }
 }
