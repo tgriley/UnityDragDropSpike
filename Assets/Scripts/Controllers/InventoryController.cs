@@ -1,28 +1,57 @@
-﻿using Enums;
+﻿using System.Collections.Generic;
+using Enums;
+using Factories;
 using Models;
+using Persistence;
 using UnityEngine;
 
 namespace Controllers
 {
     public class InventoryController : MonoBehaviour
     {
+        private readonly Inventory _inventoryModel = new Inventory();
+
         private void Start()
         {
-            const int inventorySize = 9;
+            CreateGrid(9, new List<ItemTypes> {ItemTypes.Type1, ItemTypes.Type2});
+            LoadInventory();
+            Populate();
+        }
 
+        private void CreateGrid(int inventorySize, IList<ItemTypes> allowedItemTypes)
+        {
             for (var i = 0; i < inventorySize; i++)
             {
-                var slot = (GameObject) Instantiate(Resources.Load("Prefabs/Slot"), transform.parent.Find("Slots").transform, true);
-                slot.GetComponent<SlotController>().AllowedItemsTypes.AddRange(new []{ItemTypes.Type1, ItemTypes.Type2});
+                var original = Resources.Load("Prefabs/Slot");
+                var parent = transform.parent.Find("Slots").transform;
+                var instantiateInWorldSpace = true;    
+                var slot = (GameObject) Instantiate(original, parent, instantiateInWorldSpace);
+                slot.GetComponent<SlotController>().AllowedItemsTypes.AddRange(allowedItemTypes);
             }
+        }
 
+        private void Populate()
+        {
             var parent = transform.parent;
 
-            var items = new Inventory().Items;
-            for (var i = 0; i < items.Count; i++)
+            for (var i = 0; i < _inventoryModel.Items.Count; i++)
             {
-                var newItem = (GameObject) Instantiate(Resources.Load("Prefabs/Item"), parent.Find("Slots").GetChild(i), true);
-                newItem.GetComponent<ItemController>().ItemModel = items[i];
+                var original = Resources.Load("Prefabs/Item");
+                var child = parent.Find("Slots").GetChild(i);
+                var instantiateInWorldSpace = true;
+                var newItem = (GameObject) Instantiate(original, child, instantiateInWorldSpace);
+                newItem.GetComponent<ItemController>().ItemModel = _inventoryModel.Items[i];
+            }
+        }
+
+        private void LoadInventory()
+        {
+            var saveStateRepository = new SaveStateRepository();
+            var saveState = saveStateRepository.Read();
+
+            foreach (var saveStateItem in saveState.Inventory)
+            {
+                _inventoryModel.Items.Add(ItemFactory.GetItem(saveStateItem.Id));
             }
         }
     }

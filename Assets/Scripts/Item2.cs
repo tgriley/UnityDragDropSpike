@@ -11,7 +11,7 @@ public class Item2 : IItem
 
     public string Name
     {
-        get { return "Item 2 of power"; }
+        get { return "Item 2 of water"; }
     }
 
     public Sprite Sprite
