@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a74216a84c2437197387086bbf8b0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Infrastructure: {fileID: 1773956925}
-  Inventory: {fileID: 1831112400}
+  Infrastructure: {fileID: 206963249}
+  Inventory: {fileID: 1555779306}
 --- !u!4 &155558178
 Transform:
   m_ObjectHideFlags: 0

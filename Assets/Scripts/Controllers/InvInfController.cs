@@ -15,18 +15,25 @@ namespace Controllers
 
         public void SaveState()
         {
-            Debug.Log("Save State Called");
-//            var saveState = new SaveState();
-//
-//            var infrastructureController = Infrastructure.GetComponent<InfrastructureController>();
-//
-//            foreach (var item in infrastructureController.InfrastructureModel.Items)
-//            {
-//                var saveStateItem = new SaveStateItem(){ Id = ItemFactory.GetSaveStateItemId(item)};
-//                saveState.Infrastructure.Add(saveStateItem);
-//            }
-//            
-//            _saveStateRepository.Save(saveState);
+            var saveState = new SaveState();
+
+            var infrastructureController = Infrastructure.GetComponent<InfrastructureController>();
+
+            foreach (var item in infrastructureController.InfrastructureModel.Items)
+            {
+                var saveStateItem = new SaveStateItem(){ Id = ItemFactory.GetSaveStateItemId(item)};
+                saveState.Infrastructure.Add(saveStateItem);
+            }
+            
+            var inventoryController = Inventory.GetComponent<InventoryController>();
+
+            foreach (var item in inventoryController.InventoryModel.Items)
+            {
+                var saveStateItem = new SaveStateItem(){ Id = ItemFactory.GetSaveStateItemId(item)};
+                saveState.Inventory.Add(saveStateItem);
+            }
+            
+            _saveStateRepository.Save(saveState);
         }
     }
 }

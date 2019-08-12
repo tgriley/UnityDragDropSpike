@@ -9,7 +9,7 @@ namespace Controllers
 {
     public class InventoryController : MonoBehaviour
     {
-        private readonly Inventory _inventoryModel = new Inventory();
+        public readonly Inventory InventoryModel = new Inventory();
 
         private void Start()
         {
@@ -34,13 +34,13 @@ namespace Controllers
         {
             var parent = transform.parent;
 
-            for (var i = 0; i < _inventoryModel.Items.Count; i++)
+            for (var i = 0; i < InventoryModel.Items.Count; i++)
             {
                 var original = Resources.Load("Prefabs/Item");
                 var child = parent.Find("Slots").GetChild(i);
                 var instantiateInWorldSpace = true;
                 var newItem = (GameObject) Instantiate(original, child, instantiateInWorldSpace);
-                newItem.GetComponent<ItemController>().ItemModel = _inventoryModel.Items[i];
+                newItem.GetComponent<ItemController>().ItemModel = InventoryModel.Items[i];
             }
         }
 
@@ -51,7 +51,7 @@ namespace Controllers
 
             foreach (var saveStateItem in saveState.Inventory)
             {
-                _inventoryModel.Items.Add(ItemFactory.GetItem(saveStateItem.Id));
+                InventoryModel.Items.Add(ItemFactory.GetItem(saveStateItem.Id));
             }
         }
     }
